@@ -2,6 +2,9 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Gettext = imports.gettext;
+const GETTEXT_DOMAIN = 'gnome-shell-extension-hibernate-status';
+
 
 const LoginManager = imports.misc.loginManager;
 const Main = imports.ui.main;
@@ -10,6 +13,10 @@ const PopupMenu = imports.ui.popupMenu;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 const ConfirmDialog = Me.imports.confirmDialog;
 const ExtensionSystem = imports.ui.extensionSystem;
+
+initTranslations(Me);
+
+const _ = Gettext.gettext;
 
 const Extension = new Lang.Class({
     Name: 'HibernateStatus.Extension',
@@ -208,5 +215,18 @@ const Extension = new Lang.Class({
 function init(metadata) {
     var extension = new Extension();
     return (extension);
+}
+
+function initTranslations(extension) {
+    let localeDir = extension.dir.get_child('locale').get_path();
+
+    // Extension installed in .local
+    if (GLib.file_test(localeDir, GLib.FileTest.EXISTS)) {
+        Gettext.bindtextdomain(GETTEXT_DOMAIN, localeDir);
+    }
+    // Extension installed system-wide
+    else {
+        Gettext.bindtextdomain(GETTEXT_DOMAIN, extension.metadata.locale);
+    }
 }
 

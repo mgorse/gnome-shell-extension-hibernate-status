@@ -10,28 +10,36 @@ const PopupMenu = imports.ui.popupMenu;
 const ModalDialog = imports.ui.modalDialog;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
+const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Extension = Me.imports.extension;
+
+const Gettext = imports.gettext;
+
+Extension.initTranslations(Me);
+
+const _ = Gettext.gettext;
 
 const HibernateDialogContent = {
-    subject: C_("title", "Hibernate"),
-    description: "Do you really want to hibernate the system ?",
+    subject: C_("title", _("Hibernate")),
+    description: _("Do you really want to hibernate the system ?"),
     confirmButtons: [{ signal: 'CancelHibernate',
-                       label:  C_("button", "Cancel"),
+                       label:  C_("button", _("Cancel")),
                          key:    Clutter.Escape },
                      { signal: 'ConfirmedHibernate',
-                       label:  C_("button", "Hibernate"),
+                       label:  C_("button", _("Hibernate")),
                        default: true}],
     iconName: 'document-save-symbolic',
     iconStyleClass: 'end-session-dialog-shutdown-icon',
 };
 
 const SystemdMissingDialogContent = {
-    subject: C_("title", "Hybernate button: Systemd Missing"),
-    description: "Systemd seems to be missing and is required.",
+    subject: C_("title", _("Hybernate button: Systemd Missing")),
+    description: _("Systemd seems to be missing and is required."),
     confirmButtons: [{ signal: 'CancelDisableExtension',
-                       label:  C_("button", "Cancel"),
+                       label:  C_("button", _("Cancel")),
                          key:    Clutter.Escape },
                        { signal: 'DisableExtension',
-                       label:  C_("button", "Disable Extension"),
+                       label:  C_("button", _("Disable Extension")),
                        default: true }],
     iconName: 'document-save-symbolic',
     iconStyleClass: 'end-session-dialog-shutdown-icon',
