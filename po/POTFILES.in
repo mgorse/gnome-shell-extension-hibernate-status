@@ -1,1 +1,2 @@
-src/confirmDialog.js src/extension.js
+src/confirmDialog.js
+src/extension.js
