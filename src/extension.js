@@ -2,8 +2,8 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
-const Gettext = imports.gettext;
 const GETTEXT_DOMAIN = 'gnome-shell-extension-hibernate-status';
+const Gettext = imports.gettext.domain(GETTEXT_DOMAIN);
 
 
 const LoginManager = imports.misc.loginManager;
@@ -222,11 +222,11 @@ function initTranslations(extension) {
 
     // Extension installed in .local
     if (GLib.file_test(localeDir, GLib.FileTest.EXISTS)) {
-        Gettext.bindtextdomain(GETTEXT_DOMAIN, localeDir);
+        imports.gettext.bindtextdomain(GETTEXT_DOMAIN, localeDir);
     }
     // Extension installed system-wide
     else {
-        Gettext.bindtextdomain(GETTEXT_DOMAIN, extension.metadata.locale);
+        imports.gettext.bindtextdomain(GETTEXT_DOMAIN, extension.metadata.locale);
     }
 }
 

@@ -13,7 +13,7 @@ const Clutter = imports.gi.Clutter;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Extension = Me.imports.extension;
 
-const Gettext = imports.gettext;
+const Gettext = imports.gettext.domain(Extension.GETTEXT_DOMAIN);
 
 Extension.initTranslations(Me);
 
